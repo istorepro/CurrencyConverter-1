@@ -15,8 +15,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var reaisLabel: UILabel!
     @IBOutlet weak var textField: UITextField!
     
-    var rates: ExchangeRates?
-
     // MARK: - Private Methods
 
     func fetchExchangeRates() {
@@ -32,11 +30,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     func populateLabels(exchangeRates: ExchangeRates, dollars:Double) {
-        
-        guard let pounds = exchangeRates.pounds,
-            euro = exchangeRates.euro,
-            yen = exchangeRates.yen,
-            reais = exchangeRates.reais else { return }
+        guard let rates = exchangeRates.rates else {
+            return }
+        guard let pounds = rates.pounds,
+            euro = rates.euro,
+            yen = rates.yen,
+            reais = rates.reais else { return }
             poundsLabel.text = String(format:"%.2f", pounds * dollars)
             euroLabel.text = String(format:"%.2f", euro * dollars)
             yenLabel.text = String(format:"%.2f", yen * dollars)

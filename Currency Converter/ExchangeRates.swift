@@ -8,20 +8,19 @@
 
 import Gloss
 
-// Model class that contains the exchange rate of USD to four different currencies.
+// Model class that contains the base currency and the date, along with a submodel of the exchange rates
 public struct ExchangeRates: Decodable {
     
-    let pounds: Double?
-    let euro: Double?
-    let yen: Double?
-    let reais: Double?
+    let base: String?
+    let date: String?
+    let rates: Rates?
     
     // MARK: - Init Method
     
     public init?(json: JSON) {
-        self.pounds = "rates.GBP" <~~ json
-        self.euro = "rates.EUR" <~~ json
-        self.yen = "rates.JPY" <~~ json
-        self.reais = "rates.BRL" <~~ json
+        
+        self.base = "base" <~~ json
+        self.date = "date" <~~ json
+        self.rates = "rates" <~~ json
     }
 }
